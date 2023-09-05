@@ -4,6 +4,7 @@
 import { BASE_API_URL, getWorks, getCategories } from "./api.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
+  const loginButton = document.querySelector("#login-link");
   // Code pour afficher les œuvres et gérer les filtres par catégorie
   let selectedCategory = null; // Initialement aucune catégorie sélectionnée
 
@@ -72,4 +73,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
   await setupPage();
   await displayWorks();
+  // Gérer le clic sur le bouton "Login" / "Logout"
+  loginButton.addEventListener("click", () => {
+    window.location.href = "login.html";
+  });
 });
