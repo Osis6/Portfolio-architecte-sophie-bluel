@@ -17,5 +17,37 @@ async function getCategories() {
   return categories;
 }
 
+// Fonction pour effectuer la connexion de l'utilisateur
+async function loginUser(email, password) {
+  try {
+    const response = await fetch(`${BASE_API_URL}/users/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      const token = data.token;
+      localStorage.setItem("authToken", token);
+      return { success: true };
+    } else {
+      return {
+        success: false,
+        message: "Erreur dans l'identifiant ou le mot de passe.",
+      };
+    }
+  } catch (error) {
+    return {
+      success: false,
+      message: "Une erreur s'est produite lors de la connexion.",
+    };
+  }
+}
+
 // Export des fonctions et de la constante
-export { BASE_API_URL, getWorks, getCategories };
+export { BASE_API_URL, getWorks, getCategories, loginUser };

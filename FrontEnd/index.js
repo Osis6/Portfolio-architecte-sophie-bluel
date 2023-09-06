@@ -1,10 +1,11 @@
 // index.js : Ce fichier gère l'affichage des œuvres et des filtres par catégorie et la modal
 
 // Importez les fonctions et la constante depuis api.js
-import { BASE_API_URL, getWorks, getCategories } from "./api.js";
+import { getWorks, getCategories } from "./api.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const loginButton = document.querySelector("#login-link");
+  const authToken = localStorage.getItem("authToken");
   // Code pour afficher les œuvres et gérer les filtres par catégorie
   let selectedCategory = null; // Initialement aucune catégorie sélectionnée
 
@@ -66,6 +67,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
   async function setupPage() {
     const filtersDiv = await displayCategories();
+    // Si l'utilisateur est connecté, masquer les boutons de filtre
+    if (authToken) {
+      filtersDiv.style.display = "none";
+    }
     // Attacher filtersDiv à la section du portfolio
     const portfolioSection = document.getElementById("portfolio");
     const galleryDiv = portfolioSection.querySelector(".gallery");
@@ -76,5 +81,28 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Gérer le clic sur le bouton "Login" / "Logout"
   loginButton.addEventListener("click", () => {
     window.location.href = "login.html";
+  });
+
+  // Vérifier si l'utilisateur est connecté (a un token d'authentification)
+  if (authToken) {
+    // L'utilisateur est connecté, afficher le bouton "Logout" et la barre d'options,
+    loginButton.textContent = "Logout";
+  } else {
+    // L'utilisateur n'est pas connecté, afficher le bouton "Login" et masquer la barre d'options
+    loginButton.textContent = "Login"; // Remettre le texte à "Login"
+  }
+
+  // Gérer le clic sur le bouton "Login" / "Logout"
+  loginButton.addEventListener("click", () => {
+    if (authToken) {
+      // Si l'utilisateur est connecté (a un token), alors il clique pour se déconnecter
+      localStorage.removeItem("authToken");
+      // Rediriger vers la page de connexion
+      window.location.href = "index.html";
+    } else {
+      // Sinon, l'utilisateur clique pour se connecter
+      // Rediriger vers la page de connexion
+      window.location.href = "login.html";
+    }
   });
 });
