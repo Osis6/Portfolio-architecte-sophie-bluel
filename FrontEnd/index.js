@@ -6,6 +6,9 @@ import { getWorks, getCategories } from "./api.js";
 document.addEventListener("DOMContentLoaded", async () => {
   const loginButton = document.querySelector("#login-link");
   const authToken = localStorage.getItem("authToken");
+  const portfolioSection = document.getElementById("portfolio");
+  const siteOptions = document.querySelector("#options-bar");
+  const modifyButton = portfolioSection.querySelector(".modify-button");
   // Code pour afficher les œuvres et gérer les filtres par catégorie
   let selectedCategory = null; // Initialement aucune catégorie sélectionnée
 
@@ -72,7 +75,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       filtersDiv.style.display = "none";
     }
     // Attacher filtersDiv à la section du portfolio
-    const portfolioSection = document.getElementById("portfolio");
     const galleryDiv = portfolioSection.querySelector(".gallery");
     portfolioSection.insertBefore(filtersDiv, galleryDiv);
   }
@@ -87,9 +89,19 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (authToken) {
     // L'utilisateur est connecté, afficher le bouton "Logout" et la barre d'options,
     loginButton.textContent = "Logout";
+    siteOptions.style.display = "block";
+    // Vérifier si le bouton "Modifier" est déjà présent
+    if (modifyButton) {
+      modifyButton.style.display = "block"; // Afficher le bouton "Modifier"
+    }
   } else {
     // L'utilisateur n'est pas connecté, afficher le bouton "Login" et masquer la barre d'options
     loginButton.textContent = "Login"; // Remettre le texte à "Login"
+    siteOptions.style.display = "none";
+    // Vérifier si le bouton "Modifier" est déjà présent
+    if (modifyButton) {
+      modifyButton.style.display = "none"; // Masquer le bouton "Modifier"
+    }
   }
 
   // Gérer le clic sur le bouton "Login" / "Logout"
@@ -103,6 +115,26 @@ document.addEventListener("DOMContentLoaded", async () => {
       // Sinon, l'utilisateur clique pour se connecter
       // Rediriger vers la page de connexion
       window.location.href = "login.html";
+    }
+  });
+
+  // Modal
+  const modal = document.getElementById("myModal");
+  // Gérez le clic sur le bouton "éditer"
+  modifyButton.addEventListener("click", async () => {
+    // Affichez la modal
+    modal.style.display = "block";
+  });
+  // Sélectionnez le bouton "x" pour fermer la modal
+  const closeButton = modal.querySelector(".close");
+  // Gérez le clic sur le bouton "x"
+  closeButton.addEventListener("click", () => {
+    modal.style.display = "none";
+  });
+  // Gérez le clic en dehors du contenu de la modal pour la fermer
+  modal.addEventListener("click", (event) => {
+    if (event.target === modal) {
+      modal.style.display = "none";
     }
   });
 });

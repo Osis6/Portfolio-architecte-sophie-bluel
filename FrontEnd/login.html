@@ -14,38 +14,32 @@
     <link rel="stylesheet" href="./assets/style.css" />
   </head>
   <body>
-    <header>
-      <h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
-      <nav>
-        <ul>
-          <li>projets</li>
-          <li>contact</li>
-          <li>login</li>
-          <li><img src="./assets/icons/instagram.png" alt="Instagram" /></li>
-        </ul>
-      </nav>
-    </header>
-    <main>
-      <section id="login">
-        <h2>log in</h2>
-        <form action="#" method="post">
-          <label for="email">Email</label>
-          <input type="email" name="email" id="email" />
-          <label for="password">Mot de passe</label>
-          <input type="password" name="password" id="password" />
-          <input type="submit" value="Se connecter" />
-          <a href="#">Mot de passe oublié</a>
-        </form>
-      </section>
-      <div class="error-message">
-        <div class="error-popup">
-          <p class="error-text">
-            Erreur dans l'identifiant ou le mot de passe.
-          </p>
-          <button id="closeErrorPopup">OK</button>
-        </div>
-      </div>
-    </main>
+    <div class="body">
+      <header>
+        <h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
+        <nav>
+          <ul>
+            <li>projets</li>
+            <li>contact</li>
+            <li>login</li>
+            <li><img src="./assets/icons/instagram.png" alt="Instagram" /></li>
+          </ul>
+        </nav>
+      </header>
+      <main>
+        <section id="login">
+          <h2>log in</h2>
+          <form action="#" method="post">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" />
+            <label for="password">Mot de passe</label>
+            <input type="password" name="password" id="password" />
+            <input type="submit" value="Se connecter" />
+            <a href="#">Mot de passe oublié</a>
+          </form>
+        </section>
+      </main>
+    </div>
     <footer>
       <nav>
         <ul>
@@ -53,6 +47,12 @@
         </ul>
       </nav>
     </footer>
+    <div class="error-message">
+      <div class="error-popup">
+        <p class="error-text">Erreur dans l'identifiant ou le mot de passe.</p>
+        <button id="closeErrorPopup">OK</button>
+      </div>
+    </div>
     <script type="module" src="api.js"></script>
     <script type="module" src="login.js"></script>
   </body>

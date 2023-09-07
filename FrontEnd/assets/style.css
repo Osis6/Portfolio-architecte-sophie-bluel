@@ -128,11 +128,15 @@ table {
   border-spacing: 0;
 }
 /** end reset css**/
-body {
+.body {
   max-width: 1140px;
   margin: auto;
   font-family: "Work Sans";
   font-size: 14px;
+  min-height: calc(100vh - 60px);
+}
+body {
+  background-color: #fffef8;
 }
 header {
   display: flex;
@@ -261,16 +265,21 @@ footer nav ul {
   display: flex;
   justify-content: flex-end;
   margin: 2em;
+  padding: 20px;
+}
+footer {
+  height: 60px;
+  background-color: #ffffff;
 }
 /*** Style pour les boutons de filtre ***/
 .filters {
   display: flex;
   justify-content: center;
   gap: 10px;
-  margin: 50px;
+  margin-bottom: 50px;
 }
 .filters button {
-  background-color: white;
+  background-color: #fffef8;
   color: #1d6154;
   font-size: 16px;
   font-weight: 700;
@@ -348,5 +357,90 @@ footer nav ul {
   color: #fffef8;
   border: none;
   border-radius: 5px;
+  cursor: pointer;
+}
+/* Style pour la barre noire en dessous du header */
+#options-bar {
+  background-color: black;
+  height: 60px;
+  color: white;
+  text-align: center;
+  max-width: 100%;
+}
+
+/* Positionnement des options au milieu */
+#site-options {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+}
+#edit-mode-button {
+  font-family: "Work Sans";
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  gap: 10px;
+  background-color: black;
+  color: white;
+  padding: 20px 10px;
+  border: none;
+  cursor: pointer;
+}
+/* boutton Modifier */
+.title-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 150px;
+  margin-bottom: 20px;
+}
+
+.modify-button {
+  background-color: #fffef8;
+  border: none;
+  color: black;
+  font-size: 16px;
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+  margin-left: 30px;
+  margin-bottom: 25px;
+  cursor: pointer;
+}
+/* Style de la modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 630px;
+  height: 700px;
+  position: relative;
+  border-radius: 20px;
+}
+
+.modal-content h2 {
+  font-size: 26px;
+  text-align: center;
+  padding-top: 60px;
+}
+/* Style du bouton de fermeture */
+.close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 24px;
   cursor: pointer;
 }
