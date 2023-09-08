@@ -49,5 +49,23 @@ async function loginUser(email, password) {
   }
 }
 
+// Fonction pour supprimer une œuvre par son ID
+async function deleteWork(id, authToken) {
+  const response = await fetch(`${BASE_API_URL}/works/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      Authorization: `Bearer ${authToken}`,
+    },
+  });
+
+  if (response.ok) {
+    return true; // La suppression a réussi
+  } else {
+    return false; // La suppression a échoué
+  }
+}
+
 // Export des fonctions et de la constante
-export { BASE_API_URL, getWorks, getCategories, loginUser };
+export { BASE_API_URL, getWorks, getCategories, loginUser, deleteWork };

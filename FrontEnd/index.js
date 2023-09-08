@@ -1,7 +1,7 @@
 // index.js : Ce fichier gère l'affichage des œuvres et des filtres par catégorie et la modal
 
 // Importez les fonctions et la constante depuis api.js
-import { getWorks, getCategories } from "./api.js";
+import { getWorks, getCategories, deleteWork } from "./api.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const loginButton = document.querySelector("#login-link");
@@ -124,6 +124,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   modifyButton.addEventListener("click", async () => {
     // Affichez la modal
     modal.style.display = "block";
+    // Appelez la fonction pour afficher les photos
+    await displayWorksInModal();
   });
   // Sélectionnez le bouton "x" pour fermer la modal
   const closeButton = modal.querySelector(".close");
@@ -137,4 +139,76 @@ document.addEventListener("DOMContentLoaded", async () => {
       modal.style.display = "none";
     }
   });
+
+  // Sélectionnez l'élément qui contiendra les miniatures de la galerie de photos
+  const galleryContainer = modal.querySelector(".gallery-container");
+
+  async function displayWorksInModal() {
+    // Récupérez la liste de toutes les photos depuis l'API
+    const works = await getWorks();
+
+    // Effacez le contenu actuel de la galerie
+    galleryContainer.innerHTML = "";
+
+    works.forEach((work) => {
+      const thumbnail = document.createElement("div");
+      thumbnail.classList.add("thumbnail");
+
+      // Créez un conteneur pour le texte "Éditer"
+      const editContainer = document.createElement("div");
+      editContainer.classList.add("edit-container");
+
+      // Ajoutez le texte "Éditer" au conteneur
+      const editSpan = document.createElement("span");
+      editSpan.textContent = "éditer";
+      editContainer.appendChild(editSpan);
+
+      // Ajoutez l'image en miniature
+      const img = document.createElement("img");
+      img.src = work.imageUrl;
+
+      // Ajoutez le conteneur du texte "Éditer" sous l'image
+      thumbnail.appendChild(img);
+      thumbnail.appendChild(editContainer);
+
+      // Créez le bouton de suppression avec l'icône de la poubelle
+      const deleteButton = document.createElement("button");
+      deleteButton.classList.add("delete-button");
+
+      // Créez l'icône de la poubelle et définissez ses styles
+      const trashIcon = document.createElement("i");
+      trashIcon.classList.add("fa-solid", "fa-trash-can");
+      trashIcon.style.color = "#fffef8";
+
+      // Ajoutez l'icône de la poubelle au bouton de suppression
+      deleteButton.appendChild(trashIcon);
+      deleteButton.setAttribute("data-work-id", work.id);
+
+      // Ajoutez le bouton de suppression à la miniature
+      thumbnail.appendChild(deleteButton);
+
+      // Ajoutez la miniature à la galerie
+      galleryContainer.appendChild(thumbnail);
+      // Gérez le clic sur le bouton supprimer img
+      deleteButton.addEventListener("click", async (event) => {
+        // Empêchez le comportement par défaut du bouton (rechargement de la page)
+        event.preventDefault();
+        event.stopPropagation();
+
+        const response = await deleteWork(work.id, authToken);
+        if (response) {
+          // Supprimez l'élément du DOM après la suppression réussie
+          const thumbnailToDelete = document.querySelector(
+            `.thumbnail[data-work-id="${work.id}"]`
+          );
+          if (thumbnailToDelete) {
+            thumbnailToDelete.remove(); // Masquez la miniature
+          }
+          // Mise à jour du contenu de la modal sans la fermer
+          await displayWorksInModal();
+          await displayWorks();
+        }
+      });
+    });
+  }
 });
