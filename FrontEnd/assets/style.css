@@ -128,7 +128,7 @@ table {
   border-spacing: 0;
 }
 /** end reset css**/
-.body {
+.container {
   max-width: 1140px;
   margin: auto;
   font-family: "Work Sans";
@@ -180,6 +180,7 @@ nav li {
 
 li:hover {
   color: #b1663c;
+  cursor: pointer;
 }
 #introduction {
   display: flex;
@@ -324,41 +325,19 @@ footer {
   text-align: center;
   color: black;
 }
-/* Erreur-Login */
-.error-message {
+/* Style pour le conteneur d'erreur */
+.error-container {
   display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
-  justify-content: center;
-  align-items: center;
-}
-
-.error-popup {
-  background-color: #fffef8;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 10px;
   text-align: center;
+  margin-top: 10px;
+}
+/* Style pour le texte d'erreur */
+.error-text {
+  color: #ff0000;
+  font-weight: bold;
 }
 
-.error-popup p {
-  margin-bottom: 10px;
-  font-size: 16px;
-}
-
-.error-popup button {
-  padding: 8px 16px;
-  background-color: #1d6154;
-  color: #fffef8;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
 /* Style pour la barre noire en dessous du header */
 #options-bar {
   background-color: black;
@@ -384,7 +363,7 @@ footer {
   color: white;
   padding: 20px 10px;
   border: none;
-  cursor: pointer;
+  cursor: default;
 }
 /* boutton Modifier */
 .title-container {
@@ -494,4 +473,81 @@ footer {
   border-radius: 3px;
   padding: 3px;
   cursor: pointer;
+}
+/* Style de la modal+Ajout  */
+
+.add-photo-container {
+  display: flex;
+  flex-direction: column;
+  width: 470px;
+  height: 200px;
+  align-items: center;
+  background-color: #e8f1f6;
+  margin-top: 40px;
+  margin-left: 80px;
+}
+.fa-regular.fa-image {
+  font-size: 80px;
+  margin-top: 15px;
+  color: #cbd6dc;
+}
+#photoUpload {
+  display: none;
+}
+.custom-file-input {
+  font-family: "Syne";
+  color: #306685;
+  background-color: #cbd6dc;
+  padding: 13px;
+  width: 160px;
+  text-align: center;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+#backToInitialStateButton {
+  position: absolute;
+  top: 20px;
+  left: 30px;
+  border: none;
+  background-color: #fefefe;
+}
+.add-photo-state form {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  margin-right: 80px;
+  margin-left: 80px;
+}
+.add-photo-state input {
+  height: 50px;
+  font-size: 1.2em;
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+.add-photo-state select {
+  height: 50px;
+  font-size: 1.2em;
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+.add-photo-state label {
+  margin: 1em 0 1em 0;
+  font-size: 13px;
+}
+.add-photo-state span {
+  font-family: "Work Sans";
+  font-size: 11px;
+}
+.photo-add-plus {
+  display: flex;
+  border-top: 2px solid #bebdbd;
+  margin-top: 50px;
+}
+#uploadPhotoButton {
+  width: 250px;
+  height: 40px;
+  font-size: 14px;
+  margin-top: 40px;
+  background-color: #ccc;
 }

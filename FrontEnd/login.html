@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="./assets/style.css" />
   </head>
   <body>
-    <div class="body">
+    <div class="container">
       <header>
         <h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
         <nav>
@@ -38,6 +38,11 @@
             <a href="#">Mot de passe oublié</a>
           </form>
         </section>
+        <div class="error-container">
+          <p class="error-text">
+            Erreur dans l'identifiant ou le mot de passe.
+          </p>
+        </div>
       </main>
     </div>
     <footer>
@@ -47,13 +52,6 @@
         </ul>
       </nav>
     </footer>
-    <div class="error-message">
-      <div class="error-popup">
-        <p class="error-text">Erreur dans l'identifiant ou le mot de passe.</p>
-        <button id="closeErrorPopup">OK</button>
-      </div>
-    </div>
-    <script type="module" src="api.js"></script>
     <script type="module" src="login.js"></script>
   </body>
 </html>

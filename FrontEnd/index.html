@@ -31,7 +31,7 @@
         </ul>
       </nav>
     </div>
-    <div class="body">
+    <div class="container">
       <header>
         <h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
         <nav>
@@ -103,20 +103,60 @@
         </ul>
       </nav>
     </footer>
-    <script type="module" src="api.js"></script>
-    <script type="module" src="index.js"></script>
     <!-- Modal -->
     <div id="myModal" class="modal">
       <div class="modal-content">
         <span class="close">&times;</span>
-        <h2>Galerie photo</h2>
-        <div class="gallery-container">
-          <!-- Affichage des miniatures des photos ici -->
+        <div class="initial-state">
+          <h2>Galerie photo</h2>
+          <div class="gallery-container">
+            <!-- Affichage des miniatures des photos ici -->
+          </div>
+          <div class="photo-add">
+            <input
+              type="submit"
+              value="Ajouter une photo"
+              id="addPhotoButton"
+            />
+          </div>
         </div>
-        <div class="photo-add">
-          <input type="submit" value="Ajouter une photo" id="addPhotoButton" />
+        <div class="add-photo-state" style="display: none">
+          <h2>Ajout photo</h2>
+          <div class="add-photo-container">
+            <i class="fa-regular fa-image hidden"></i>
+            <label for="photoUpload" class="custom-file-input hidden"
+              >+ Ajouter une photo</label
+            >
+            <input
+              type="file"
+              id="photoUpload"
+              accept="image/*"
+              class="custom-file-input"
+            />
+            <span class="hidden">jpg,png : 4mo max</span>
+          </div>
+          <form action="#" method="post">
+            <label for="photoTitle">Titre</label>
+            <input type="text" id="photoTitle" />
+            <label for="photoCategory">Catégorie</label>
+            <select id="photoCategory">
+              <option value=""></option>
+            </select>
+            <div class="photo-add-plus">
+              <input
+                type="submit"
+                value="Valider"
+                id="uploadPhotoButton"
+                disabled
+              />
+            </div>
+          </form>
+          <button id="backToInitialStateButton">
+            <i class="fa-solid fa-arrow-left" style="color: #000000"></i>
+          </button>
         </div>
       </div>
     </div>
+    <script type="module" src="index.js"></script>
   </body>
 </html>
