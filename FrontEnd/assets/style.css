@@ -511,6 +511,10 @@ footer {
   left: 30px;
   border: none;
   background-color: #fefefe;
+  cursor: pointer;
+}
+.add-photo-state {
+  display: none;
 }
 .add-photo-state form {
   text-align: left;

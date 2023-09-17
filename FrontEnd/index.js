@@ -181,6 +181,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const photoCategory = document.getElementById("photoCategory");
   const uploadPhotoButton = document.getElementById("uploadPhotoButton");
   const addPhotoContainer = document.querySelector(".add-photo-container");
+  const uploadPhotoForm = document.getElementById("uploadPhoto");
 
   const categories = await getCategories();
   categories.forEach((category) => {
@@ -236,7 +237,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (
       photoUpload.files.length > 0 &&
       photoTitle.value.trim() !== "" &&
-      photoCategory.value !== ""
+      photoCategory.value !== "0"
     ) {
       uploadPhotoButton.removeAttribute("disabled");
       uploadPhotoButton.style.backgroundColor = "#1d6154";
@@ -246,7 +247,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
-  uploadPhotoButton.addEventListener("click", async (event) => {
+  uploadPhotoForm.addEventListener("submit", async (event) => {
     event.preventDefault();
     const authToken = localStorage.getItem("authToken");
     const formData = new FormData();
@@ -270,8 +271,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       hiddenElements.forEach((element) => {
         element.style.display = "inline-block";
       });
-    } else {
-      alert("L'ajout de l'œuvre a échoué. Veuillez réessayer.");
     }
     await displayWorks();
   });
